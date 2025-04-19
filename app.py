@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 # Load assessment data
-with open("shl_assessments.json") as f:
+with open("shl_assessments.json", encoding="utf-8") as f:
     assessments_data = json.load(f)
 
 def similar(a, b):
@@ -43,17 +43,24 @@ def recommend_assessments(query, max_results=10):
     return [res[1] for res in results[:max_results]]
 
 # Streamlit UI
-st.title("SHL Assessment Recommendation System")
+st.set_page_config(page_title="SHL Assessment Recommender", layout="wide")
+st.title("📊 SHL Assessment Recommendation System")
 st.markdown("Enter a job description or query, and get top SHL assessments:")
 
-query = st.text_area("Enter your job description or query")
-if st.button("Recommend"):
+query = st.text_area("✍️ Enter your job description or query")
+
+if st.button("🔍 Recommend"):
     if query.strip():
         with st.spinner("Finding best matches..."):
             recommendations = recommend_assessments(query)
-        st.success(f"Top {len(recommendations)} Assessment(s) Found")
-        
-        # Create a DataFrame for better handling of table layout
+
+        st.success(f"✅ Top {len(recommendations)} Assessment(s) Found")
+
+        # Display each assessment name with a clickable URL
+        for a in recommendations:
+            st.markdown(f"**[{a['name']}]({a['url']})**")
+
+        # Show summary table
         df = pd.DataFrame([{
             "Assessment Name": a["name"],
             "Remote": a["remote"],
@@ -62,12 +69,6 @@ if st.button("Recommend"):
             "Type": a["type"]
         } for a in recommendations])
 
-        # Display each assessment name with a clickable URL for the user to view
-        for i, a in enumerate(recommendations):
-            st.markdown(f"**{a['name']}**: [Click Here to View the Assessment]({a['url']})")
-
-        # Use st.dataframe for better dynamic table resizing and prevent scroll
         st.dataframe(df, use_container_width=True)
-
     else:
-        st.warning("Please enter a job description or query.")
+        st.warning("⚠️ Please enter a job description or query.")
