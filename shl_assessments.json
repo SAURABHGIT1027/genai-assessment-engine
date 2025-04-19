@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Verify G+ Test",
+      "url": "https://www.shl.com/solutions/products/product-catalog/view/verify-g/",
+      "remote": "Yes",
+      "adaptive": "Yes",
+      "duration": "36 mins",
+      "type": "Cognitive Ability"
+    },
+    {
+      "name": "OPQ (Occupational Personality Questionnaire)",
+      "url": " https://www.shl.com/solutions/products/assessments/personality-assessment/shl-occupational-personality-questionnaire-opq/",
+      "remote": "Yes",
+      "adaptive": "No",
+      "duration": "40 mins",
+      "type": "Personality"
+    },
+    {
+      "name": "Numerical Reasoning Test",
+      "url": "https://www.shl.com/solutions/products/product-catalog/view/verify-numerical-ability/",
+      "remote": "Yes",
+      "adaptive": "Yes",
+      "duration": "25 mins",
+      "type": "Cognitive Ability"
+    }
+  ]
+  
